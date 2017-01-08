@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<canvas id="canvas" width="600" height="600"></canvas>
+<script>
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    var raf;
+    var running = false;
+    var ball = {
+        x: 100,
+        y: 300,
+
+        radius: 25,
+        color: 'blue',
+        draw: function() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2, true);
+            ctx.closePath();
+            ctx.fillStyle = this.color;
+            ctx.fill();
+        }
+    };
+
+    function draw() {
+
+        ctx.fillStyle = 'rgba(255,255,255,0.3)';
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+        ball.draw();
+
+
+
+        if (ball.y + ball.vy > canvas.height || ball.y + ball.vy < 0) {
+            ball.vy = -ball.vy;
+        }
+        if (ball.x + ball.vx > canvas.width || ball.x + ball.vx < 0) {
+            ball.vx = -ball.vx;
+        }
+        raf = window.requestAnimationFrame(draw);
+    }
+   ball. draw();
+    canvas.addEventListener("click",function(e){
+
+            raf = window.requestAnimationFrame(draw);
+            ball.y *= 1.09;
+
+
+        }
+    );
+
+</script>
+</body>
+</html>

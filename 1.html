@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        #canvas{
+            background:rgb(28,15,68);
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="800px" height="600px">
+
+</canvas>
+<script>
+    var canvas=document.getElementById("canvas");
+    var context=canvas.getContext('2d');
+    function begin() {
+
+
+        context.clearRect(0,0,800,600)
+
+        function plus (i,j) {
+            context.save();
+            context.beginPath();
+            context.moveTo(i,i);
+            context.lineTo(i+j, i);
+            context.lineTo(i+j, i+j*2);
+            context.lineTo(i+j*3, i+j*2);
+            context.lineTo(i+j*3, i+j*3);
+            context.lineTo(i+j, i+j*3);
+            context.lineTo(i+j, i+j*5);
+            context.lineTo(i, i+j*5);
+            context.lineTo(i, i+j*3);
+            context.lineTo(i-j*2, i+j*3);
+            context.lineTo(i-j*2, i+j*2);
+            context.lineTo(i, i+j*2);
+            context.closePath();
+            context.lineWidth = 1;
+            context.fillStyle = "rgb(154,0,161)";
+            context.fill();
+            context.restore();
+        }
+        plus(300,3);
+        plus(200,4);
+        plus(500,2);
+        plus(260,2);
+
+        function drawStar(ctx,r){
+            ctx.save();
+            ctx.beginPath()
+            ctx.moveTo(r,0);
+            for (var i=0;i<9;i++){
+                ctx.rotate(Math.PI/5);
+                if(i%2 == 0) {
+                    ctx.lineTo((r/0.525731)*2.00811,0);
+                } else {
+                    ctx.lineTo(r,0);
+                }
+            }
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+        }
+        var time = new Date();
+        for (let j=1;j<time.getSeconds()/4;j++){
+
+                context.save();
+                context.fillStyle = '#fff';
+                context.translate(350-Math.floor(Math.random()*250),
+                        550-Math.floor(Math.random()*550));
+                drawStar(context,Math.floor(Math.random()*4)+2)
+                console.log(j);
+                context.restore();
+
+        }
+
+
+
+        function basis () {
+            context.save();
+            context.beginPath();
+            context.arc(400, 350, 94, 0, Math.PI, false);
+
+            context.closePath();
+            context.fillStyle ="#ECB900";
+            context.fill();
+            context.restore();
+        }
+        basis();
+        function sumb (x,y,l,c) {
+            context.save();
+            context.beginPath();
+            context.arc(x+13, y, 13, 0, Math.PI, false);
+            context.moveTo(x,y);
+            context.lineTo(x,y-l);
+            context.arc(x+13, y-l, 13, Math.PI,0 , false);
+            context.lineTo(x+26,y);
+            context.closePath();
+
+            context.fillStyle =c;
+            context.fill();
+            context.restore();
+        }
+        var c = context.createLinearGradient(300, 256, 300, 350);
+        c .addColorStop(0, "#F9005F");
+        c .addColorStop(1, "#F1BB00");
+        var d=context.createLinearGradient(300, 256, 300, 350);
+        d.addColorStop(0, "#870058");
+        d .addColorStop(1, "#1C0F44");
+        sumb(305,350,14,c)
+        sumb(332,350,64,d);
+        sumb(359,350,54,c);
+        sumb(386,350,119,d);
+        sumb(413,350,99,c);
+        sumb(440,350,59,d);
+        sumb(467,350,69,c);
+        function eye (x,y,l,m) {
+            context.save();
+            context.beginPath();
+            context.arc(x,y,l,0,360,false);
+            context.closePath();
+            context.fillStyle =m;
+            context.fill();
+            context.restore();
+        }
+
+        eye(373,383,10,'black');
+        eye(425,383,10,'black');
+        eye(348,395,8,'pink');
+        eye(445,395,8,'pink');
+        function mouth (x,y,l,m) {
+            context.save();
+            context.beginPath();
+            context.arc(399,405,10,0,Math.PI,false);
+            context.closePath();
+            context.fillStyle ='black';
+            context.fill();
+            context.restore();
+        }
+        mouth();
+
+
+        function light(p){
+            context.save();
+            context.beginPath();
+            context.moveTo(389,211);
+            context.lineTo(356, 188);
+            context.lineTo(314, 195);
+            context.lineTo(336, 165);
+            context.lineTo(311, 131);
+            context.lineTo(355, 139);
+            context.lineTo(381, 116);
+            context.lineTo(391,151 );
+            context.lineTo(430,167 );
+            context.lineTo(395, 183);
+            context.closePath();
+            context.fillStyle =p;
+            context.fill();
+            context.restore();
+        }
+         light('#EDFC06');
+
+
+
+        function lighting(x,y,z,w){
+            context.save();
+            context.beginPath();
+            context.moveTo(x,y);
+            context.lineTo(z, w);
+            context.closePath();
+            context.strokeStyle =o;
+            context.stroke();
+            context.restore();
+        }
+        var o='#EDFC06';
+        lighting(421,151,446,137);
+        lighting(398,137,431,120);
+        lighting();
+        lighting();
+        lighting();
+        lighting();
+        context.font = "20px serif";
+        //2. 使用`fillStyle`设置字体颜色。
+        context.fillStyle = "#00AAAA";
+        //3. 使用`fillText()`方法显示字体。
+        context.textAlign="start";
+        context.fillText("愿夜里有人为你留灯，", 400, 120);
+        context.fillText("你爱的那个人，",500,450);
+        context.fillText("也能住进你的人生",520,470);
+        context.fillText("...",540,490);
+    }
+
+function n() {
+    setInterval(begin,1000)
+    window.requestAnimationFrame(begin);
+}
+n()
+</script>
+</body>
+</html>
